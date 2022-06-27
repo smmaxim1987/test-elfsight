@@ -1,0 +1,16 @@
+.idea
+vendor
+storage
+
+# Mac DS_Store Files
+.DS_Store
+
+# ENV
+.env
+
+# Assets
+
+node_modules
+npm-debug.log
+.package-lock.json
+dist
