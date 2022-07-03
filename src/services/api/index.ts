@@ -1,5 +1,11 @@
 import axios from 'axios'
+export * from './characters'
 
 export const api = axios.create({
-  baseURL: process.env.API_ROOT || 'https://rickandmortyapi.com/api',
+  baseURL: 'https://rickandmortyapi.com/api',
 })
+
+api.interceptors.response.use(
+  response => response.data,
+  error => Promise.reject(error)
+)

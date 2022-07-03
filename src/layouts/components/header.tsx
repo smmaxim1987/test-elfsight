@@ -1,24 +1,14 @@
 import * as React from 'react'
-import { paths } from 'constant'
-import { NavLink } from 'react-router-dom'
+import { Logo } from 'layouts'
+import { Box, BoxProps } from '@chakra-ui/react'
 
-export type HeaderProps = React.HTMLAttributes<HTMLElement>
-
-const mainNavs = [
-  { url: paths.home(), name: 'Главная' },
-]
+export type HeaderProps = BoxProps
 
 function HeaderRaw(props: HeaderProps) {
   return (
-    <div {...props}>
-      <nav>
-        {mainNavs.map(({ url, name }) => (
-          <NavLink to={url} key={name}>
-            {name}
-          </NavLink>
-        ))}
-      </nav>
-    </div>
+    <Box as="header" display="flex" justifyContent="center" {...props}>
+      <Logo />
+    </Box>
   )
 }
 

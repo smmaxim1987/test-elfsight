@@ -1,17 +1,16 @@
 import * as React from 'react'
-import { exampleFeature } from 'model'
+import { charactersModel, CharactersTable } from 'features/characters'
 import { useStore } from 'effector-react'
-import { Button } from '@chakra-ui/react'
+import { Loading } from 'ui'
 
 export function HomePage() {
-  const counter = useStore(exampleFeature.state)
-  return (
-    <>
-      <h1>Hello World!</h1>
-      <p>
-        current count <b>{counter}</b>
-      </p>
-      <Button onClick={() => exampleFeature.addCounter()}>Click me</Button>
-    </>
-  )
+  const characters = useStore(charactersModel.$characters)
+  const isLoading = useStore(charactersModel.getCharactersFx.pending)
+
+  React.useEffect(() => {
+    void charactersModel.getCharactersFx({})
+  }, [])
+
+  if (isLoading) return <Loading />
+  return characters && <CharactersTable data={characters} />
 }

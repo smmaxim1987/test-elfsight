@@ -1,12 +1,28 @@
 import { IPaginationWrap } from '.'
 
+export enum CharacterGender {
+  female = 'Female',
+  male = 'Male',
+  unknown = 'Unknown'
+}
+
+export enum CharacterSpecies {
+  human = 'Human',
+  alien = 'Alien',
+}
+
+export enum CharacterStatus {
+  alive = 'Alive',
+  dead = 'Dead',
+  unknown = 'Unknown'
+}
 export interface ICharacter {
   id: number
   name: string
-  status: string
-  species: string
+  status: CharacterStatus
+  species: CharacterSpecies
   type: string
-  gender: string
+  gender: CharacterGender
   origin: {
     name: string
     url: string
@@ -25,7 +41,7 @@ export namespace Characters {
   export namespace Request {
     export interface GetList {
       count?: number
-      pages?: number
+      page?: number
       next?: string
       prev?: string
     }

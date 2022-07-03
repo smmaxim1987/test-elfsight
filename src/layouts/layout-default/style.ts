@@ -11,9 +11,7 @@ export const Main = styled.main`
   flex: 1 0 auto;
 `
 
-export const Header = styled(HeaderOriginal)`
-  min-height: 40px;
-`
+export const Header = styled(HeaderOriginal)``
 
 export const Footer = styled(FooterOrigilan)`
   flex: 0 0 auto;
