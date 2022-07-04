@@ -3,7 +3,7 @@ import { Wrap, Header, Footer, Main } from './style'
 
 export interface LayoutDefaultProps extends React.HTMLAttributes<HTMLElement> { }
 
-function LayoutDefaultRaw({ children, ...props }: LayoutDefaultProps) {
+export function LayoutDefault({ children, ...props }: LayoutDefaultProps) {
   return (
     <Wrap {...props}>
       <Header />
@@ -13,4 +13,3 @@ function LayoutDefaultRaw({ children, ...props }: LayoutDefaultProps) {
   )
 }
 
-export const LayoutDefault = React.memo(LayoutDefaultRaw)

@@ -1,5 +1,6 @@
 import * as React from 'react'
 import {
+  TableProps,
   Table,
   Thead,
   Tbody,
@@ -10,26 +11,28 @@ import {
   TableContainer,
   Button,
   Box,
-  Image,
+  Avatar,
   Text,
 } from '@chakra-ui/react'
-import { Characters } from 'services/interfaces'
-import { CharackerGender } from './character-gender'
+import { Characters, ICharacter } from 'services/interfaces'
+import { CharacterGender } from './character-gender'
 import { parseUrl } from 'query-string'
-import { charactersModel } from 'features/characters'
+import { Icons } from 'ui'
 
-export interface CharactersTableProps extends React.HTMLAttributes<HTMLElement> {
+export interface CharactersTableProps extends TableProps {
   data: Characters.Response.GetList
+  onChangePage?: (value: { page: number }) => void
+  onViewCharacter?: (character: ICharacter) => void
 }
 
-export function CharactersTable({ data, ...props }: CharactersTableProps) {
+export function CharactersTable({ data, onChangePage, onViewCharacter, ...props }: CharactersTableProps) {
+  const handleVievCharacter = (ch: ICharacter) => onViewCharacter && onViewCharacter(ch)
   const handleChangePage = (currentPage: string) => {
     const { query: { page } } = parseUrl(currentPage)
-    page && charactersModel.changeParams({ page: Number(page) })
+    onChangePage && onChangePage({ page: Number(page) })
   }
-
   return (
-    <TableContainer>
+    <TableContainer {...props}>
       <Table variant='simple'>
         <Thead>
           <Tr>
@@ -44,14 +47,14 @@ export function CharactersTable({ data, ...props }: CharactersTableProps) {
         </Thead>
         <Tbody>
           {data?.results?.map(ch => (
-            <Tr key={ch.id}>
-              <Th>{ch.id}</Th>
-              <Th><Image alt={ch.name} src={ch.image} objectFit='cover' boxSize='80px' /></Th>
-              <Th>{ch.name}</Th>
-              <Th>{ch.status}</Th>
-              <Th>{ch.species}</Th>
-              <Th>{ch.type}</Th>
-              <Th><CharackerGender data={ch.gender} /></Th>
+            <Tr key={ch.id} onClick={() => handleVievCharacter(ch)} _hover={{ background: 'gray.50', cursor: 'pointer' }}>
+              <Td>{ch.id}</Td>
+              <Td><Avatar name={ch.name} src={ch.image} /></Td>
+              <Td>{ch.name}</Td>
+              <Td>{ch.status}</Td>
+              <Td>{ch.species}</Td>
+              <Td>{ch.type}</Td>
+              <Td><CharacterGender data={ch.gender} /></Td>
             </Tr>
           ))}
         </Tbody>

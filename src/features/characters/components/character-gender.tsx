@@ -1,31 +1,21 @@
 import * as React from 'react'
 import { Icons } from 'ui'
-import { CharacterGender } from 'services/interfaces'
-import { Tooltip } from '@chakra-ui/react'
+import { CharacterGender as CharacterGenderEnum } from 'services/interfaces'
+import { Tooltip, Box } from '@chakra-ui/react'
 
 export interface GenderProps {
-  data: CharacterGender
+  data: CharacterGenderEnum
 }
 
-function CharackerGenderRaw({ data }: GenderProps) {
+function CharacterGenderRaw({ data }: GenderProps) {
   switch (data) {
-    case CharacterGender.female:
-      return (
-        <Tooltip hasArrow label={CharacterGender.female}>
-          <Icons.Female />
-        </Tooltip>
-      )
-    case CharacterGender.male:
-      return (
-        <Tooltip hasArrow label={CharacterGender.male}>
-          <Icons.Male />
-        </Tooltip>
-      )
+    case CharacterGenderEnum.female:
+      return <Icons.Female />
+    case CharacterGenderEnum.male:
+      return <Icons.Male />
     default:
-      return (
-        <Tooltip hasArrow label={CharacterGender.unknown}>&mdash;</Tooltip>
-      )
+      return <>&mdash;</>
   }
 }
 
-export const CharackerGender = React.memo(CharackerGenderRaw)
+export const CharacterGender = React.memo(CharacterGenderRaw)

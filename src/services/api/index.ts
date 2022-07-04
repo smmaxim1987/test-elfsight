@@ -1,5 +1,6 @@
 import axios from 'axios'
 export * from './characters'
+import { toast } from 'react-toastify'
 
 export const api = axios.create({
   baseURL: 'https://rickandmortyapi.com/api',
@@ -7,5 +8,5 @@ export const api = axios.create({
 
 api.interceptors.response.use(
   response => response.data,
-  error => Promise.reject(error)
+  error => error
 )
